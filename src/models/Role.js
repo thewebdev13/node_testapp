@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Role = sequelize.define('Role', {
@@ -13,7 +13,7 @@ const Role = sequelize.define('Role', {
     allowNull: false
   },
   permissions: {
-    type: DataTypes.JSON,
+    type: DataTypes.TEXT,
     allowNull: true
   },
   createdAt: {

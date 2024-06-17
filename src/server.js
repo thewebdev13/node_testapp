@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { Sequelize, Op } = require('sequelize');
-const { User, Role } = require('./models');
+const { User, Role, User_meta } = require('./models');
 const bodyParser = require('body-parser');
 const { sendEmail } = require('./mailer');
 const crypto = require('crypto');
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 /*Get users api*/
 app.get('/', async (req, res) => {
   const users = await User.findAll({
-    include: [Role]
+    include: [Role, User_meta]
   });
   res.json(users);
 });

@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const bcrypt = require('bcrypt');
 
@@ -113,6 +113,8 @@ const User = sequelize.define('User', {
 
 User.associate = function(models) {
   User.belongsTo(models.Role, { foreignKey: 'role_id' });
+
+  User.hasMany(models.User_meta, { foreignKey: 'user_id' });
 };
 
 module.exports = User;

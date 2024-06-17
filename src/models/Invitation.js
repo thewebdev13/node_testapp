@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Invitation = sequelize.define('Invitation', {
@@ -17,7 +17,7 @@ const Invitation = sequelize.define('Invitation', {
       allowNull: false
     },
     permissions: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT,
       allowNull: true
     },
     createdAt: {

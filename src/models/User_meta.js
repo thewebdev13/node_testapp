@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const User_meta = sequelize.define('User_meta', {
@@ -17,9 +17,14 @@ const User_meta = sequelize.define('User_meta', {
     allowNull: false
   },
   meta_value: {
-    type: DataTypes.JSON,
+    type: DataTypes.TEXT,
     allowNull: true
   }
 });
+
+
+User_meta.associate = function(models) {
+  User_meta.belongsTo(models.User, { foreignKey: 'user_id' });
+};
 
 module.exports = User_meta;
