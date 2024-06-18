@@ -33,4 +33,19 @@ async function sendMessage(recipients, from, message) {
     }
 }
 
-module.exports = { sendMessage, sendSingleMessage };
+async function sendMediaMessage(to, from, message,mediaUrl) {
+    try {
+        const messageInstance = await client.messages.create({
+            body: message,
+            from: from,
+            to: to,
+            mediaUrl: mediaUrl
+        });
+        console.log(messageInstance);
+        //return [{ success: true, message: 'Message sent successfully', SID: messageInstance.sid }];
+    } catch (error) {
+        return [{ success: false, message: 'Failed to send message', SID: '', error: error }];
+    }
+}
+
+module.exports = { sendMessage, sendSingleMessage, sendMediaMessage };

@@ -115,6 +115,16 @@ User.associate = function(models) {
   User.belongsTo(models.Role, { foreignKey: 'role_id' });
 
   User.hasMany(models.User_meta, { foreignKey: 'user_id' });
+
+  User.hasMany(models.Vault, { foreignKey: 'user_id' });
+
+  User.belongsToMany(models.Communities, {
+    through: models.Community_users,
+    foreignKey: 'user_id',
+    otherKey: 'community_id'
+  });
+
+  User.hasMany(models.Communities, { as: 'CreatedCommunities', foreignKey: 'created_by' });
 };
 
 module.exports = User;

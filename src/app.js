@@ -4,7 +4,8 @@ const sequelize = require('./config/database');
 const routes = require('./routes');
 const { sendEmail } = require('./mailer');
 const { sendMessage } = require('./sendMessage');
-
+/*const Communities = require('./models/Communities');
+const Community_users = require('./models/Community_users');*/
 
 dotenv.config();
 
@@ -16,14 +17,14 @@ app.use(routes);
 
 const PORT = process.env.PORT || 5000;
 
-/*sequelize
+sequelize
   .sync()
   .then(() => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch((error) => console.error('Error connecting to the database:', error));*/
+  .catch((error) => console.error('Error connecting to the database:', error));
 
-  const data = { firstName: "Tester", lastName:"new", reapplyLink: "google.com", setupLink: "google.com"};
+  /*const data = { firstName: "Tester", lastName:"new", reapplyLink: "google.com", setupLink: "google.com"};
 
   //const emails = ["webutopianteamupdates@gmail.com", "devuthopian@gmail.com"];
   const email = "webutopianteamupdates@gmail.com";
@@ -32,14 +33,13 @@ const PORT = process.env.PORT || 5000;
   const response = sendEmail('accountSubmit', data, email, subject);
 
   console.log(response);
-
-  /*const messageBody = 'Hello from Twilio! this is a test message.';
+  const messageBody = 'Hello from Twilio! this is a test message.';
   const fromNumber ='+13254408881';
 
-  const recipients = ['+16265398373', '+18395291710', '+12817603626'];
+  const recipients = ['+16265398373', '+18395291710', '+12817603626'];*/
 
-  app.listen(PORT, async () => {
-    const result = await sendMessage(recipients, fromNumber, messageBody);
-    console.log(result);
+  /*app.listen(PORT, async () => {
+    //const result = await sendMessage(recipients, fromNumber, messageBody);
+    //console.log(result);
     console.log(`Server running on port ${PORT}`);
   });*/
