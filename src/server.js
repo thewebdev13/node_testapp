@@ -285,23 +285,12 @@ app.post('/create-community', async (req, res) => {
             location
         });
         if (community.id) {
-            const community_id = community.id;
-            const existingCommunityUsers = await Community_users.findAll({ where: { community_id } });
-            const existingUserIds = existingCommunityUsers.map(cu => cu.user_id);
+            const communityUsers = user_ids.map(user_id => ({
+                user_id,
+                community_id: community.id
+            }));
 
-            // Step 3: Determine Changes
-            const userIdsToAdd = user_ids.filter(userId => !existingUserIds.includes(userId));
-            const userIdsToRemove = existingUserIds.filter(userId => !user_ids.includes(userId));
-
-            // Step 4: Update the Associations
-            if (userIdsToAdd.length > 0) {
-                const communityUsersToAdd = userIdsToAdd.map(user_id => ({ user_id, community_id }));
-                await Community_users.bulkCreate(communityUsersToAdd);
-            }
-
-            if (userIdsToRemove.length > 0) {
-                await Community_users.destroy({ where: { user_id: userIdsToRemove, community_id } });
-            }
+            await Community_users.bulkCreate(communityUsers);
         }
         res.status(200).json({ message: 'Community created successfully.', communityId: community.id });
     } catch (error) {
